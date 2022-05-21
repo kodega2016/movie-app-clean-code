@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app_clean_code/src/common/constants/translation_constants.dart';
 import 'package:movie_app_clean_code/src/common/extensions/string_extensions.dart';
 import 'package:movie_app_clean_code/src/data/core/api_constants.dart';
 import 'package:movie_app_clean_code/src/domain/entities/movie_entity.dart';
@@ -28,7 +29,7 @@ class MovieTabbed extends StatelessWidget {
                     BlocProvider.of<MovieTabbedBloc>(context)
                         .add(ChangeMovieTab(index: 0));
                   },
-                  label: 'Now Playing',
+                  label: TranslationConstants.now.t(context),
                 ),
                 MovieTabbedItem(
                   isSelected: state.currentIndex == 1,
@@ -36,7 +37,7 @@ class MovieTabbed extends StatelessWidget {
                     BlocProvider.of<MovieTabbedBloc>(context)
                         .add(ChangeMovieTab(index: 1));
                   },
-                  label: 'Popular',
+                  label: TranslationConstants.popular.t(context),
                 ),
                 MovieTabbedItem(
                   isSelected: state.currentIndex == 2,
@@ -44,7 +45,7 @@ class MovieTabbed extends StatelessWidget {
                     BlocProvider.of<MovieTabbedBloc>(context)
                         .add(ChangeMovieTab(index: 2));
                   },
-                  label: 'Upcoming',
+                  label: TranslationConstants.soon.t(context),
                 ),
               ],
             ),

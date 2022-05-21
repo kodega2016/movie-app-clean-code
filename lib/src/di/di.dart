@@ -8,6 +8,7 @@ import 'package:movie_app_clean_code/src/domain/usecases/get_comming_soon.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_now_playing.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_popular.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_trending.dart';
+import 'package:movie_app_clean_code/src/presentation/blocs/language/language_bloc.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_carousel/movie_carousel_bloc.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_tabbed/movie_tabbed_bloc.dart';
@@ -42,4 +43,6 @@ void init() {
       getCommingSoon: getIt(),
     ),
   );
+
+  getIt.registerSingleton<LanguageBloc>(LanguageBloc());
 }

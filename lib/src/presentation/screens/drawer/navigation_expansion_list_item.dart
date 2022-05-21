@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app_clean_code/src/common/constants/languages.dart';
+import 'package:movie_app_clean_code/src/presentation/blocs/language/language_bloc.dart';
+import 'package:movie_app_clean_code/src/presentation/blocs/language/language_event.dart';
 import 'package:movie_app_clean_code/src/presentation/screens/drawer/navigation_sub_list_tile.dart';
 import 'package:movie_app_clean_code/src/presentation/themes/theme_colors.dart';
 
@@ -38,7 +42,13 @@ class NavigationExpansionListItem extends StatelessWidget {
         children: children.map((e) {
           return NavigationSubListItem(
             label: e,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+              final language = Lanuages.languages[children.indexOf(e)];
+
+              BlocProvider.of<LanguageBloc>(context)
+                  .add(ChangeLanguage(language: language));
+            },
           );
         }).toList(),
       ),

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:movie_app_clean_code/src/presentation/widgets/movie_logo.dart';
 
 class MovieAppBar extends StatelessWidget {
   const MovieAppBar({
@@ -13,12 +15,11 @@ class MovieAppBar extends StatelessWidget {
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
-          icon: const Icon(
-            Icons.menu,
-            color: Colors.white,
-          ),
+          icon: SvgPicture.asset('assets/svgs/menu.svg'),
         ),
-        Expanded(child: Container()),
+        const Expanded(
+          child: MovieLogo(height: 30),
+        ),
         IconButton(
           onPressed: () {},
           icon: const Icon(

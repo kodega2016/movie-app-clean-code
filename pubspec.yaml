@@ -20,6 +20,10 @@ dependencies:
   get_it: ^7.2.0
   cached_network_image: ^3.2.1
   google_fonts: ^2.3.3
+  flutter_svg: ^1.0.3
+  flutter_localizations:
+    sdk: flutter
+  wiredash: ^0.7.1
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +34,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/pngs/
+    - assets/svgs/
+    - assets/languages/

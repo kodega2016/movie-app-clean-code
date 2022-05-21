@@ -21,7 +21,6 @@ class MovieTabbedLoading extends MovieTabbedState {
 }
 
 class MovieTabbedLoaded extends MovieTabbedState {
-  @override
   final List<MovieEntity> movies;
 
   const MovieTabbedLoaded({

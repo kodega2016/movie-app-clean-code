@@ -13,6 +13,7 @@ class ApiClient {
   Future<Map<String, dynamic>> get(String path) async {
     final uri = Uri.parse(
         '${ApiConstants.baseUrl}$path?api_key=${ApiConstants.apiKey}');
+
     final response = await client.get(uri);
 
     if (response.statusCode == 200) {

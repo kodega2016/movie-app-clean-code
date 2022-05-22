@@ -9,6 +9,7 @@ import 'package:movie_app_clean_code/src/presentation/app_localization.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/language/language_bloc.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/language/language_event.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/language/language_state.dart';
+import 'package:movie_app_clean_code/src/presentation/themes/theme_colors.dart';
 import 'package:movie_app_clean_code/src/presentation/wiredash_app.dart';
 
 import 'screens/home/home_screen.dart';
@@ -56,6 +57,11 @@ class _MovieAppState extends State<MovieApp> {
                   title: 'Movie App Clean Code',
                   theme: ThemeData(
                     fontFamily: GoogleFonts.pangolin().fontFamily,
+                    unselectedWidgetColor: ThemeColors.royalBlue,
+                    visualDensity: VisualDensity.adaptivePlatformDensity,
+                    appBarTheme: const AppBarTheme(elevation: 0),
+                    colorScheme: ColorScheme.fromSwatch()
+                        .copyWith(secondary: ThemeColors.royalBlue),
                   ),
                   home: const MovieScreen(),
                   locale: Locale(state.language.code),

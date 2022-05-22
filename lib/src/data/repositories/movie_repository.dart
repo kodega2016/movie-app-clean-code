@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:movie_app_clean_code/src/data/data_sources/movie_remote_data_source.dart';
 import 'package:movie_app_clean_code/src/domain/entities/app_error.dart';
+import 'package:movie_app_clean_code/src/domain/entities/cast_entity.dart';
 import 'package:movie_app_clean_code/src/domain/entities/movie_detail_entity.dart';
 import 'package:movie_app_clean_code/src/domain/entities/movie_entity.dart';
+import 'package:movie_app_clean_code/src/domain/entities/video_entity.dart';
 import 'package:movie_app_clean_code/src/domain/repositories/movie_repository.dart';
 
 class MovieRepositoryImpl implements MovieRepository {
@@ -64,6 +66,30 @@ class MovieRepositoryImpl implements MovieRepository {
   Future<Either<AppError, MovieDetailEntity>> getMovieDetail(int id) async {
     try {
       final result = await movieRemoteDataSource.getMovieDetail(id);
+      return Right(result);
+    } on SocketException {
+      return const Left(AppError(errorType: ErrorType.network));
+    } catch (e) {
+      return const Left(AppError(errorType: ErrorType.api));
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<CastEntity>>> getCastCrew(int id) async {
+    try {
+      final result = await movieRemoteDataSource.getCaseCrew(id);
+      return Right(result);
+    } on SocketException {
+      return const Left(AppError(errorType: ErrorType.network));
+    } catch (e) {
+      return const Left(AppError(errorType: ErrorType.api));
+    }
+  }
+
+  @override
+  Future<Either<AppError, List<VideoEntity>>> getVideos(int id) async {
+    try {
+      final result = await movieRemoteDataSource.getVideos(id);
       return Right(result);
     } on SocketException {
       return const Left(AppError(errorType: ErrorType.network));

@@ -6,8 +6,9 @@ import 'package:movie_app_clean_code/src/presentation/movie_app.dart';
 import 'src/di/di.dart' as di;
 
 void main() async {
-  BlocOverrides.runZoned(() {
+  BlocOverrides.runZoned(() async {
     di.init();
+
     runApp(const MovieApp());
   }, blocObserver: MovieBlocObserver());
 }

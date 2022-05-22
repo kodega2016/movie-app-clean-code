@@ -16,9 +16,7 @@ class MovieTab extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Container(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-          ),
+          padding: const EdgeInsets.symmetric(horizontal: 10),
           child: Text(label),
         ),
         const SizedBox(height: 8),

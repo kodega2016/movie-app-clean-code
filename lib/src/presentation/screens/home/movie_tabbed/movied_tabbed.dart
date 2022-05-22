@@ -8,6 +8,9 @@ import 'package:movie_app_clean_code/src/presentation/blocs/movie_tabbed/movie_t
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_tabbed/movie_tabbed_event.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_tabbed/movie_tabbed_state.dart';
 import 'package:movie_app_clean_code/src/presentation/screens/home/movie_tabbed/movie_tabbed_item.dart';
+import 'package:movie_app_clean_code/src/presentation/screens/movie_detail/movie_detail.dart';
+import 'package:movie_app_clean_code/src/presentation/screens/movie_detail/movie_detail_arguments.dart';
+import 'package:movie_app_clean_code/src/presentation/widgets/error_widget.dart';
 
 class MovieTabbed extends StatelessWidget {
   const MovieTabbed({Key? key}) : super(key: key);
@@ -50,43 +53,75 @@ class MovieTabbed extends StatelessWidget {
               ],
             ),
             if (state is MovieTabbedLoaded)
-              Flexible(
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: state.movies.length,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
-                  itemBuilder: (context, i) {
-                    final MovieEntity movie = state.movies[i];
-                    return Column(
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Builder(builder: (context) {
-                              return ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: Image.network(
-                                  '${ApiConstants.imageUrl}${movie.posterPath}',
+              state.movies.isEmpty
+                  ? Expanded(
+                      child: Container(
+                        alignment: Alignment.center,
+                        child: Text(TranslationConstants.noMovies.t(context)),
+                      ),
+                    )
+                  : Flexible(
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: state.movies.length,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 8,
+                        ),
+                        itemBuilder: (context, i) {
+                          final MovieEntity movie = state.movies[i];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) {
+                                return MovieDetail(
+                                    movieDetailArguments: MovieDetailArguments(
+                                  id: movie.id,
+                                ));
+                              }));
+                            },
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Builder(builder: (context) {
+                                      return ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: Image.network(
+                                          '${ApiConstants.imageUrl}${movie.posterPath}',
+                                        ),
+                                      );
+                                    }),
+                                  ),
                                 ),
-                              );
-                            }),
-                          ),
-                        ),
-                        Text(
-                          movie.title.trimToFixedString,
-                          style: Theme.of(context).textTheme.bodyText2,
-                        ),
-                      ],
-                    );
-                  },
+                                Text(
+                                  movie.title.trimToFixedString,
+                                  style: Theme.of(context).textTheme.bodyText2,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+            if (state is MovieTabbedLoading)
+              const Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Center(child: CircularProgressIndicator()),
                 ),
               ),
-            if (state is MovieTabbedLoading)
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: CircularProgressIndicator(),
-              )
+            if (state is MovieTabbedError)
+              Expanded(
+                child: PErrorWidget(
+                    errorType: state.errorType,
+                    onPressed: () {
+                      BlocProvider.of<MovieTabbedBloc>(context).add(
+                        ChangeMovieTab(index: state.currentIndex),
+                      );
+                    }),
+              ),
           ],
         );
       }),

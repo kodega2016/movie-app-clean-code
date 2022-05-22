@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app_clean_code/src/domain/entities/no_params.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_popular.dart';
-import 'package:movie_app_clean_code/src/domain/usecases/no_params.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_backdrop/movie_backdrop_bloc.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_backdrop/movie_backdrop_event.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_carousel/movie_carousel_event.dart';

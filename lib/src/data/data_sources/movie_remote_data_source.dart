@@ -1,5 +1,6 @@
 import 'package:movie_app_clean_code/src/data/core/api_client.dart';
 import 'package:movie_app_clean_code/src/data/core/api_path.dart';
+import 'package:movie_app_clean_code/src/data/models/movie_detail_model.dart';
 import 'package:movie_app_clean_code/src/data/models/movie_model.dart';
 
 abstract class MovieRemoteDataSource {
@@ -7,6 +8,7 @@ abstract class MovieRemoteDataSource {
   Future<List<MovieModel>> getCommingSoon();
   Future<List<MovieModel>> getPopular();
   Future<List<MovieModel>> getNowPlaying();
+  Future<MovieDetailModel> getMovieDetail(int id);
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
@@ -47,5 +49,11 @@ class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {
     return data['results']
         .map<MovieModel>((doc) => MovieModel.fromJson(doc))
         .toList();
+  }
+
+  @override
+  Future<MovieDetailModel> getMovieDetail(int id) async {
+    final data = await apiClient.get('${ApiPath.movieDetail}/$id');
+    return MovieDetailModel.fromJson(data);
   }
 }

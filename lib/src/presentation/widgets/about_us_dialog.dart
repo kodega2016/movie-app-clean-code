@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app_clean_code/src/common/extensions/string_extensions.dart';
+import 'package:movie_app_clean_code/src/presentation/themes/theme_colors.dart';
 import 'package:movie_app_clean_code/src/presentation/widgets/p_button.dart';
 
 class AboutUsDialog extends StatelessWidget {
@@ -17,9 +18,10 @@ class AboutUsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Dialog(
-      insetPadding: const EdgeInsets.all(32),
+      backgroundColor: ThemeColors.vulcan,
+      insetPadding: const EdgeInsets.all(30),
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(16),
       ),
       child: Container(
         padding: const EdgeInsets.all(32),
@@ -28,11 +30,25 @@ class AboutUsDialog extends StatelessWidget {
           children: [
             Text(
               title.t(context),
-              style: Theme.of(context).textTheme.headline5,
+              style: Theme.of(context).textTheme.headline5?.copyWith(
+                    color: Colors.white,
+                  ),
             ),
+            const SizedBox(height: 10),
             Text(
               description.t(context),
-              style: Theme.of(context).textTheme.bodyText2,
+              textAlign: TextAlign.center,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  ?.copyWith(color: Colors.white),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Image.asset(
+                'assets/pngs/tmdb_logo.png',
+                height: 60,
+              ),
             ),
             const SizedBox(height: 14),
             PButton(

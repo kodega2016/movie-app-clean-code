@@ -4,10 +4,10 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app_clean_code/src/domain/entities/app_error.dart';
 import 'package:movie_app_clean_code/src/domain/entities/movie_entity.dart';
+import 'package:movie_app_clean_code/src/domain/entities/no_params.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_comming_soon.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_now_playing.dart';
 import 'package:movie_app_clean_code/src/domain/usecases/get_popular.dart';
-import 'package:movie_app_clean_code/src/domain/usecases/no_params.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_tabbed/movie_tabbed_event.dart';
 import 'package:movie_app_clean_code/src/presentation/blocs/movie_tabbed/movie_tabbed_state.dart';
 
@@ -28,8 +28,6 @@ class MovieTabbedBloc extends Bloc<MovieTabbedEvent, MovieTabbedState> {
       ChangeMovieTab event, Emitter<MovieTabbedState> emit) async {
     emit(MovieTabbedLoading(currentIndex: event.index));
     late Either<AppError, List<MovieEntity>> eitherErrorOrMovies;
-
-    await Future.delayed(const Duration(seconds: 2));
 
     switch (event.index) {
       case 0:

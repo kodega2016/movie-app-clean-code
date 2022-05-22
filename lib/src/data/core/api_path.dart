@@ -5,4 +5,5 @@ class ApiPath {
   static const String trending = 'trending/movie/day';
   static const String commingSoon = 'movie/upcoming';
   static const String nowPlaying = 'movie/now_playing';
+  static const String movieDetail = 'movie';
 }

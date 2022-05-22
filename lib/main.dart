@@ -8,6 +8,6 @@ import 'src/di/di.dart' as di;
 void main() async {
   BlocOverrides.runZoned(() {
     di.init();
-    runApp(MovieApp());
+    runApp(const MovieApp());
   }, blocObserver: MovieBlocObserver());
 }

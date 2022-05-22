@@ -25,7 +25,7 @@ class MovieTabbedItem extends StatelessWidget {
               label,
               style: Theme.of(context).textTheme.subtitle1,
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: 4),
             Container(
               height: 4,
               width: 70,

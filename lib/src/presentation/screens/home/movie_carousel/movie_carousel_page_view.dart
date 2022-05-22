@@ -23,8 +23,9 @@ class _MovieCarouselPageViewState extends State<MovieCarouselPageView> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.31,
       child: PageView.builder(
+        pageSnapping: true,
         itemCount: widget.movies.length,
         onPageChanged: (i) {
           BlocProvider.of<MovieBackdropBloc>(context)
